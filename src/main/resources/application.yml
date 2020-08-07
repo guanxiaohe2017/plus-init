@@ -1,0 +1,102 @@
+server:
+  port: 9000
+  display-name: plus
+#  servlet:
+#    context-path: /fhvc
+  jsp-servlet:
+    init-parameters:
+      development: true
+  session:
+    timeout: 1800
+  # 后台调用服务出现异常时是否返回堆栈信息
+  error:
+    include-stacktrace: always
+
+
+security:
+  basic:
+    enabled: false
+  user:
+    name: rmadmin
+    password: rm123456
+    role: superAdmin
+
+
+endpoints:
+  health:
+    sensitive: false
+
+management:
+  security:
+    enabled: false
+  context-path: /actuator
+
+
+spring:
+  profiles:
+    include: devdb,cloud
+  application:
+    name: ${server.display-name}
+  main: 
+    allow-bean-definition-overriding: true
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+    date-format: yyyy-MM-dd HH:mm:ss
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+#  cache:
+#    cache-names: chche1,cache2
+#    redis:
+#      time: 6000s
+#上传文件的大小设置
+  http:
+    multipart:
+      maxFileSize: 100Mb
+      maxRequestSize: 100Mb
+
+ftp:
+   host: 192.168.10.25
+   port: 21
+   username: uftp
+   password: 1234
+   ftpPath: /data/
+#人脸识别ftp配置 人脸识别存放${ftp.ftpPath}$下的文件目录
+   ftpFileAddress: recpserfile/faceRecognition/
+#APK文件存放目录
+   apkFileAddress: recpserfile/apk/
+#人脸识别ftp配置 图片存放格式
+   fileSuffix: .jpg
+#存放ftp地址前缀
+   ftpPort: http://192.168.10.25:8050/faceRecognition/
+    
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    jdbc-type-for-null: null
+    call-setters-on-nulls: true
+  mapper-locations: classpath*:/mapper/plus/**/*Mapper.xml
+
+
+conf:
+  address:
+    demo: http://localhost:8091
+  path: D:\bwbd2
+  misc-relative-path: \Files\misc\
+  auto-task: false
+
+
+logging:
+  level:
+    root: info
+  config: classpath:logback.xml
+
+
+
+
+
+
+
+  
